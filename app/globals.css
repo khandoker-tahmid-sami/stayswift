@@ -1,42 +1,80 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tailwindcss";
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Custom Utilities and Components */
+@layer utilities {
+  /* Container */
+  .container {
+    @apply max-w-7xl w-full mx-auto px-4;
   }
-}
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  /* Navbar */
+  nav {
+    @apply flex justify-between items-center px-4 py-4 absolute top-0 w-full left-0 right-0 z-50;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  nav img {
+    @apply h-[35px] md:h-[40px] lg:h-[50px];
+  }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+  nav ul {
+    @apply hidden md:flex items-center gap-6;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  nav ul .login {
+    @apply bg-[#FF6A28] px-6 py-3 text-white font-bold rounded-md;
+  }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  /* Form Fields */
+  select,
+  input[type="date"] {
+    @apply w-full px-4 py-2 rounded-md border border-black/20 bg-transparent;
+  }
+
+  /* Search Button */
+  .search-btn {
+    @apply bg-[#FF6A28] px-8 py-3 rounded-md block mx-auto text-white font-bold -translate-y-1/2 shadow-lg hover:shadow-[#FF6A28]/50 active:scale-95 transition-all;
+  }
+
+  /* Primary Button */
+  .btn-primary {
+    @apply bg-[#FF6A28] px-8 py-2 rounded-md block text-white font-bold shadow-lg hover:shadow-[#FF6A28]/50 active:scale-95 transition-all;
+  }
+
+  /* Search Box Container */
+  .search-params {
+    @apply bg-white w-full h-full py-10 lg:py-12 px-6 lg:px-8 rounded-xl border border-black/10 shadow-lg lg:flex items-center space-y-5 lg:space-y-0;
+  }
+
+  .search-params > * {
+    @apply flex-1 px-4;
+  }
+
+  .search-params span {
+    @apply font-bold mb-3 block;
+  }
+
+  /* Image Showcase */
+  .imageshowCase {
+    @apply h-[400px];
+  }
+
+  .imageshowCase img {
+    @apply h-full min-h-full w-full min-w-full object-cover;
+  }
+
+  /* Login Form */
+  .login-form {
+    @apply flex flex-col my-6;
+  }
+
+  .login-form div {
+    @apply flex flex-col gap-2 my-2;
+  }
+
+  .login-form input {
+    @apply border border-black/20 rounded-md px-4 py-2;
   }
 }
