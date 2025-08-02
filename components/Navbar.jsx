@@ -1,7 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { auth } from "@/auth";
+import Logout from "./auth/Logout";
 
-const Navbar = () => {
+
+const Navbar = async ({sideMenu}) => {
+  const session = await auth()
   return (
     <nav className="nav">
       {/* Logo */}
@@ -16,7 +20,7 @@ const Navbar = () => {
       </Link>
 
       {/* Navigation Links */}
-      <ul className="nav-list">
+      {sideMenu && (<ul className="nav-list">
         <li>
           <Link href="#">Recommended Places</Link>
         </li>
@@ -29,12 +33,18 @@ const Navbar = () => {
         <li>
           <Link href="/bookings">Bookings</Link>
         </li>
-        <li>
+        {session?.user ? (<div>
+          <span className="mx-1">{session?.user?.name}</span>
+          <span>|</span>
+          {""} <Logout/>
+        </div>) : (<li>
           <Link href="/login" className="login">
             Login
           </Link>
-        </li>
-      </ul>
+        </li>)}
+        
+      </ul>)}
+      
     </nav>
   );
 };

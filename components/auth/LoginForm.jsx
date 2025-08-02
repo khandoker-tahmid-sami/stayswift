@@ -1,6 +1,34 @@
+"use client"
+
+import { login } from "@/app/actions";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 const LoginForm = () => {
+  const [error, setError] = useState(" ")
+  const router = useRouter()
+
+  const onSubmit = async (event) =>{
+      event.preventDefault();
+
+      try{
+        const formData = new FormData(event.currentTarget)
+        const response = await login(formData)
+
+        if(!!response.error){
+          setError(response.error.message)
+        }else{
+          router.push("/bookings")
+        }
+
+      }catch(error){
+        setError(error.message)
+      }
+  }
   return (
-    <form className="login-form">
+    <>
+    {error && (<div className="text-xl text-red-500 text-center">{error}</div>)}
+
+    <form className="login-form" onSubmit={onSubmit}>
       <div>
         <label htmlFor="email">Email Address</label>
         <input type="email" name="email" id="email" />
@@ -15,6 +43,8 @@ const LoginForm = () => {
         Login
       </button>
     </form>
+    </>
+    
   );
 };
 
